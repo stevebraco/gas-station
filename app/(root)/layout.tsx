@@ -1,20 +1,30 @@
+import LeftSideBar from "@/components/LeftSideBar";
 import NavSideRight from "@/components/NavSideRight";
 import React from "react";
+import Image from '@/node_modules/next/image'
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className={`bg-primary-300`}>
+      <div>
+         <Image 
+        width={200}
+        height={200}
+        src='/assets/background.jpg' 
+        style={{width: '100%', position: 'fixed', zIndex: -1 }}
+        alt="background"
+        />
+    <main className={`bg-primary-300 max-w-[1940px] w-full mx-auto px-4`}>
+       
       <div className='flex justify-between'>
         <NavSideRight />
         <div className="w-full mx-auto p-2 pt-10">
           {children}
         </div>
-        <aside className='sticky top-0 right-3 h-screen w-[800px] flex items-center space-y-5'>
-          <div className='bg-primary-200 w-full h-[97%] rounded-2xl'></div>
-        </aside>
+       <LeftSideBar />
       </div>
     </main>
+      </div>
   );
 };
 

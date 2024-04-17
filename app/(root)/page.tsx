@@ -1,20 +1,12 @@
-'use client'
 import { useState } from 'react'
-import CardGas from "@/components/CardGas";
 import Image from "@/node_modules/next/image";
 import { Input } from "@/components/ui/input";
 import { dataCard } from "@/constants/data"
 import useCartService from '@/lib/hooks/useCartStore';
+import CardListGas from '@/components/CardListGas';
 
 export default function Home() {
-  const [selected, setSelected] = useState('')
-  const { items } = useCartService()
-  console.log(items)
 
-
-  const handleSelected = (title: string) => {
-    setSelected(title === selected ? '' : title)
-  }
   return (
     <>
       <div
@@ -37,9 +29,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className='grid grid-cols-3 gap-5 justify-items-center	'>
-        {dataCard.map(data => <CardGas name={data.label} color={data.color} title={data.name} price={data.price} selected={selected} handleSelected={handleSelected} />)}
-      </div>
+      <CardListGas data={dataCard} />
     </>
   );
 }
