@@ -47,7 +47,7 @@ export default function useCartService() {
     handleChangeLitre: (value: any) => {
       const exist = items.find((x: any) => x.title === selected)
       const updatedCartItems = exist && items.map((x: any) => x.title === selected ? 
-      {...exist, litre: value} 
+      {...exist, litre: value, total: parseFloat((value * exist.qty ) * exist.price).toFixed(2)} 
       : x) 
 
       cartStore.setState({
@@ -63,7 +63,14 @@ export default function useCartService() {
 
       cartStore.setState({
         items: updatedCartItems,
-      })    }
+      })    
+    },
+    handleDelete: (value: string) => {
+      const updatedCartItems = items.filter(item => item.title !== value)
+      cartStore.setState({
+        items: updatedCartItems,
+      }) 
+    }
   }
 }
 

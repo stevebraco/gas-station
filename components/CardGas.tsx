@@ -49,7 +49,12 @@ function CardGas({ name, color, title, price, selected, handleSelected }: { name
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Input value={valueLitre} onChange={(e) => handleChangeLitre(e.target.value)} className='bg-primary-500 border-none rounded-2xl text-primary-100 w-[50px]' />
+              <div className='flex items-center bg-primary-500 rounded-2xl px-2'>
+                <span className='text-primary-100 font-bold'>V</span>
+              <Input value={valueLitre} onChange={(e) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px]' />
+              <span className='text-primary-100 font-bold'>l</span>
+
+              </div>
             </div>
           )}
         </div>
