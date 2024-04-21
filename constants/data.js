@@ -36,3 +36,21 @@ export const dataCard = [
     price: 1.80
   }
 ]
+
+export const dataFood = [
+  {
+    name: 'Cookie',
+    price: 2.29,
+    img: '/assets/cookie.png'
+  },
+  {
+    name: 'Cookie',
+    price: 2.29,
+    img: '/assets/cookie.png'
+  },
+  {
+    name: 'Cookie',
+    price: 2.29,
+    img: '/assets/cookie.png'
+  },
+]
