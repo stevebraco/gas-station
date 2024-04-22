@@ -43,7 +43,7 @@ const NavSideRight = () => {
         <div className='flex flex-col h-full justify-around'>
           <div className='flex items-center justify-between'>
             <h3 className='text-primary-100 '>Cashier</h3>
-            <span className='text-primary-100'>94 orders</span>
+            <span className='text-primary-100'>90 orders</span>
           </div>
           <div className='flex items-center space-x-3 mt-3 rounded-full px-3 py-" bg-primary-500'>
             <Avatar className='w-[60px] h-[60px]'>

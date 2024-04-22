@@ -21,7 +21,7 @@ function CardGas({ name, color, title, price, selected, handleSelected }: { name
 
   return (
     <div>
-      <div className={`w-[250px] h-[250px] rounded-3xl flex items-center overflow-hidden border-[15px] border-solid border-current`} style={{ background: `${color}`, borderColor: selected === title ? `#21212130` : ''  }}>
+      <div className={`w-[250px] h-[250px] rounded-3xl flex items-center overflow-hidden border-[15px] border-solid border-current`} style={{ background: `${color}`, borderColor: selected === title ? `#21212130` : '' }}>
         <span className='font-bold text-[11rem] translate-x-5'>{name}</span>
       </div>
       <div className='text-left pl-2 mt-2'>
@@ -51,8 +51,8 @@ function CardGas({ name, color, title, price, selected, handleSelected }: { name
               </Select>
               <div className='flex items-center bg-primary-500 rounded-2xl px-2'>
                 <span className='text-primary-100 font-bold'>V</span>
-              <Input value={valueLitre} onChange={(e) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px]' />
-              <span className='text-primary-100 font-bold'>l</span>
+                <Input value={valueLitre} onChange={(e) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px]' />
+                <span className='text-primary-100 font-bold'>l</span>
 
               </div>
             </div>
