@@ -29,9 +29,9 @@ const config = {
         }
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        "opacity": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
@@ -39,7 +39,7 @@ const config = {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
+        "opacity-down": "opacity 2s ease-in-out infinite",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },

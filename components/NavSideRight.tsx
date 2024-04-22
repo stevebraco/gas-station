@@ -52,7 +52,7 @@ const NavSideRight = () => {
             </Avatar>
             <div>
               <span className='text-primary-100  font-bold'>Anthony Welc</span>
-              <span className='text-primary-400 font-bold block text-xs'>Order In Progress...</span>
+              <span className='text-primary-400 font-bold block text-xs animate-opacity-down'>Order In Progress...</span>
             </div>
           </div>
           <div className='flex justify-between mt-3 px-3'>

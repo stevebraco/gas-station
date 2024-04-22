@@ -5,12 +5,14 @@ export type Cart = {
   items: any
   valueLitre: string
   selected: string
+  subTotal: string
 }
 
 const initialState: Cart = {
   items: [],
   valueLitre: '10',
-  selected: ''
+  selected: '',
+  subTotal: '0'
 }
 
 export const cartStore = create<Cart>()(
@@ -21,11 +23,12 @@ export const cartStore = create<Cart>()(
 // export const cartStore = create<Cart>(() => initialState)
 
 export default function useCartService() {
-  const { items, valueLitre, selected } = cartStore()
+  const { items, valueLitre, selected, subTotal } = cartStore()
   return {
     items,
     valueLitre,
     selected,
+    subTotal,
     addToCart: (item: any) => {
       const exist = items.find((x: any) => x.name === item.name)
       const updatedCartItems = exist ? 
