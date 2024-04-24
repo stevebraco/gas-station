@@ -1,13 +1,9 @@
+import CardListGas from '@/components/CardListGas'
+import { dataFood } from '@/constants/data'
 import React from 'react'
 
 const Page = () => {
-  return (
-    <div
-      className="relative w-full max-w-[300px] max-lg:hidden pb-10 pl-10"
-    >
-      page
-    </div>
-  )
+  return <CardListGas data={dataFood} />
 }
 
 export default Page
