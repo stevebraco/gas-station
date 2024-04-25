@@ -50,12 +50,12 @@ export const dataFood = [
     img: '/assets/cookie.png'
   },
   {
-    name: 'Cookie',
+    name: 'Donuts',
     price: 2.29,
     img: '/assets/cookie.png'
   },
   {
-    name: 'Cookie',
+    name: 'Macaron',
     price: 2.29,
     img: '/assets/cookie.png'
   },

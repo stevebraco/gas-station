@@ -1,6 +1,6 @@
 'use client'
-import useCartService from '@/lib/hooks/useCartStore'
-import React from 'react'
+import useCartService, { CartType } from '@/lib/hooks/useCartStore'
+import React, { ChangeEvent } from 'react'
 import { Input } from './ui/input'
 import {
   Select,
@@ -15,11 +15,11 @@ import { quantity } from "@/constants/utils"
 
 
 function CardGas({ data, selected, handleSelected }: { data: { name: string, color: string, price: number, category: string, label: string, img: string }, selected: string, handleSelected: any }) {
-  const { addToCart, handleChangeLitre, valueLitre, handleQty, quantity: qtyCart , increase, decrease } = useCartService()
+  const { addToCart, handleChangeLitre, valueLitre, handleQty, quantity: qtyCart, increase, decrease } = useCartService()
 
   const { name, color, price, category, label, img } = data
 
-  const handleTest = (data: { name: string, color: string, price: number, category: string, label: string }) => () => {
+  const handleAddToCart = (data: CartType) => () => {
     handleSelected(data.name)
     addToCart(data)
   }
@@ -30,14 +30,14 @@ function CardGas({ data, selected, handleSelected }: { data: { name: string, col
         <div className={`w-[250px] h-[250px] rounded-3xl flex items-center justify-center overflow-hidden border-[15px] border-solid border-current`} style={{ background: `${color}`, borderColor: selected === name ? `#21212130` : '' }}>
           <span className='font-bold text-[11rem] translate-x-5'>{label}</span>
         </div>
-        <div className='text-left pl-2 mt-2'>
+        <div className='text-left pl-2 mt-1'>
           <h2 className='text-primary-100 font-bold'>{name}</h2>
           <div className='flex justify-between space-x-5 h-[40px] items-center mt-1'>
 
             {selected !== name ? (
               <>
                 <span className='text-primary-100 font-bold text-nowrap	'>$ {price.toFixed(2)}</span>
-                <button className='text-primary-100 bg-primary-500 w-full h-full rounded-3xl' onClick={handleTest(data)}>+</button>
+                <button className='text-primary-100 bg-primary-500 w-full h-full rounded-3xl' onClick={handleAddToCart(data)}>+</button>
               </>
             ) : (
               <div className='flex space-x-2'>
@@ -54,7 +54,7 @@ function CardGas({ data, selected, handleSelected }: { data: { name: string, col
                 </Select>
                 <div className='flex items-center bg-primary-500 rounded-2xl px-2'>
                   <span className='text-primary-100 font-bold'>V</span>
-                  <Input type='number' value={valueLitre} onChange={(e) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px] input-number' />
+                  <Input type='number' value={valueLitre} onChange={(e: any) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px] input-number' />
                   <span className='text-primary-100 font-bold'>l</span>
 
                 </div>
@@ -67,24 +67,24 @@ function CardGas({ data, selected, handleSelected }: { data: { name: string, col
 
   return (
     <div>
-      <div className={`w-[250px] h-[250px] rounded-3xl flex items-center justify-center bg-green-500`}>
+      <div className={`w-[250px] h-[250px] rounded-3xl flex items-center justify-center border-[15px] border-solid border-current `} style={{ background: `#edb055`, borderColor: selected === name ? `#21212130` : '' }}>
         <Image src={img} width={120} height={120} alt={name} />
       </div>
-      <div className='text-left pl-2 mt-2'>
+      <div className='text-left pl-2 mt-1'>
         <h2 className='text-primary-100 font-bold'>{name}</h2>
         <div className='flex justify-between space-x-5 h-[40px] items-center mt-1'>
 
           {selected !== name ? (
             <>
               <span className='text-primary-100 font-bold text-nowrap	'>$ {price.toFixed(2)}</span>
-              <button className='text-primary-100 bg-primary-500 w-full h-full rounded-3xl' onClick={handleTest(data)}>+</button>
+              <button className='text-primary-100 bg-primary-500 w-full h-full rounded-3xl' onClick={handleAddToCart(data)}>+</button>
             </>
           ) : (
             <div className='flex items-center justify-center space-x-2 bg-primary-500 w-full h-full rounded-full'>
               <div className='flex justify-between w-full items-center px-9'>
-               <button className='text-primary-100'onClick={decrease(data)}>-</button>
-               <span className='text-primary-100'>{qtyCart}</span>
-               <button className='text-primary-100' onClick={increase(data)}>+</button>
+                <button className='text-primary-100' onClick={decrease(data)}>-</button>
+                <span className='text-primary-100'>{qtyCart}</span>
+                <button className='text-primary-100' onClick={increase(data)}>+</button>
               </div>
             </div>
           )}
