@@ -9,7 +9,7 @@ function CardListGas({ data }: { data: any }) {
 
 
   return (
-    <div className='grid grid-cols-3 gap-5 justify-items-center	'>
+    <div className='grid grid-cols-3 grid-rows-3 gap-5'>
       {data.map(item => <CardGas key={item.label} data={item} selected={selected} handleSelected={handleSelected} />)}
     </div>
   )

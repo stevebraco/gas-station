@@ -7,14 +7,14 @@ export type CartType = {
   color: string,
   price: number,
   category: string,
-  total?: number,
-  litre?: string,
-  qty?: number
+  total: number,
+  litre: number,
+  qty: number
 }
 
 export type Cart = {
   items: CartType[]
-  valueLitre: string
+  valueLitre: number
   selected: string
   subtotal: number
   quantity: number
@@ -24,7 +24,7 @@ export type Cart = {
 
 const initialState: Cart = {
   items: [],
-  valueLitre: '10',
+  valueLitre: 10,
   selected: '',
   subtotal: 0,
   quantity: 1,
@@ -56,13 +56,13 @@ export default function useCartService() {
         items.map((x: CartType) => x.name === item.name ?
           { ...exist, }
           : x)
-        : [...items, { ...item, qty: 1, ...(item.category === 'fuel' && { litre: '10' }), total: item.category === 'fuel' ? item.price * 10 : item.price }]
+        : [...items, { ...item, qty: 1, ...(item.category === 'fuel' && { litre: 10 }), total: item.category === 'fuel' ? item.price * 10 : item.price }]
 
       const { subtotal, total } = calcPrice({ items: updatedCartItems, discount })
 
 
       cartStore.setState({
-        valueLitre: exist ? exist.litre : '10',
+        valueLitre: exist ? exist.litre : 10,
         items: updatedCartItems,
         subtotal,
         total
@@ -73,9 +73,9 @@ export default function useCartService() {
         selected: name === selected ? '' : name,
       })
     },
-    handleChangeLitre: (value: number) => {
+    handleChangeLitre: (item: CartType,value: number) => {
       const exist = items.find((x: CartType) => x.name === selected)
-      const updatedCartItems = exist ? items.map((x: any) => x.name === selected ?
+      const updatedCartItems = exist ? items.map((x: any) => x.name === item.name ?
         { ...exist, litre: value, total: value * exist.qty * exist.price }
         : x) : [...items]
 
@@ -88,9 +88,9 @@ export default function useCartService() {
         total
       })
     },
-    handleQty: (value: number) => {
+    handleQty: (item: CartType, value: number) => {
       const exist = items.find((x: CartType) => x.name === selected)
-      const updatedCartItems = exist && items.map((x: any) => x.name === selected ?
+      const updatedCartItems = exist && items.map((x: CartType) => x.name === item.name ?
         { ...exist, qty: value, total: value * exist.litre * exist.price }
         : x)
 
@@ -105,7 +105,7 @@ export default function useCartService() {
     increase: (item: CartType) => () => {
       const exist = items.find((x: CartType) => x.name === selected)
       const updatedCartItems =
-        items.map((x: any) => x.name === item.name ?
+        items.map((x: CartType) => x.name === item.name ?
           { ...exist, qty: exist!.qty + 1, total: (exist!.qty + 1) * item.price }
           : x)
 
@@ -119,10 +119,10 @@ export default function useCartService() {
       })
     },
     decrease: (item: CartType) => () => {
-      const exist = items.find((x: any) => x.name === selected)
+      const exist = items.find((x: CartType) => x.name === selected)
       const updatedCartItems = exist!.qty === 1
         ? items.filter((x: CartType) => x.name !== item.name)
-        : items.map((x: CartType) => x.name === item.name ?
+        : items.map((x) => x.name === item.name ?
           { ...exist, qty: exist!.qty - 1, total: (exist!.qty - 1) * item.price }
           : x)
 
@@ -152,7 +152,7 @@ export default function useCartService() {
   }
 }
 
-const calcPrice = ({ items, discount }: { items: CartType[], discount: number }) => {
+const calcPrice = ({ items, discount }: { items: {total: number}[], discount: number }) => {
   const subtotal = items.reduce((a, c) => a + c.total, 0)
   const total = subtotal - discount
   return {

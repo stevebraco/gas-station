@@ -1,6 +1,6 @@
 'use client'
 import useCartService, { CartType } from '@/lib/hooks/useCartStore'
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { Input } from './ui/input'
 import {
   Select,
@@ -41,7 +41,7 @@ function CardGas({ data, selected, handleSelected }: { data: { name: string, col
               </>
             ) : (
               <div className='flex space-x-2'>
-                <Select onValueChange={(value) => handleQty(value)}>
+                <Select onValueChange={(value) => handleQty(data, value)}>
                   <SelectTrigger className="w-[60px] bg-primary-500 text-primary-100 rounded-2xl border-none">
                     <SelectValue placeholder="1" />
                   </SelectTrigger>
@@ -54,7 +54,7 @@ function CardGas({ data, selected, handleSelected }: { data: { name: string, col
                 </Select>
                 <div className='flex items-center bg-primary-500 rounded-2xl px-2'>
                   <span className='text-primary-100 font-bold'>V</span>
-                  <Input type='number' value={valueLitre} onChange={(e: any) => handleChangeLitre(e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px] input-number' />
+                  <Input type='number' value={valueLitre} onChange={(e: any) => handleChangeLitre(data, e.target.value)} className='bg-primary-500 no-focus border-none rounded-2xl text-primary-100 w-[50px] input-number' />
                   <span className='text-primary-100 font-bold'>l</span>
 
                 </div>

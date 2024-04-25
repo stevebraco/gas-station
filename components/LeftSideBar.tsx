@@ -15,7 +15,7 @@ import EmptyCart from './EmptyCart'
 import {quantity} from "@/constants/utils"
 
 const LeftSideBar = () => {
-  const { items, handleDelete, subtotal, total, discount } = useCartService()
+  const { items, handleDelete, subtotal, total, discount, increase, decrease, handleChangeLitre, handleQty } = useCartService()
 
 
   return (
@@ -23,7 +23,7 @@ const LeftSideBar = () => {
       <div className='bg-primary-200 w-full h-[97%] rounded-2xl py-8 px-10'>
         <div className='flex justify-between items-baseline'>
           <h1 className='text-primary-100 font-bold'>Order #95</h1>
-          <Select>
+          <Select  >
             <SelectTrigger className="w-[100px] bg-primary-500 text-primary-100 rounded-2xl border-none">
               <SelectValue placeholder="E-Wallet" />
             </SelectTrigger>
@@ -45,7 +45,7 @@ const LeftSideBar = () => {
             <>
             <div className='h-[560px] overflow-auto custom-scrollbar'>
               {items.map(item => (
-                <div key={item.title} className='flex justify-between items-center mb-9 hover:bg-gray-100/10 p-3 rounded-3xl'>
+                <div key={item.name} className='flex justify-between items-center mb-9 hover:bg-gray-100/10 p-3 rounded-3xl'>
                   <div className='flex items-center space-x-3'>
                     <div className='w-[70px] h-[70px] bg-red-900 rounded-2xl flex items-center justify-center'>
                       <Image src='/assets/fuel.png' width={32} height={32} alt={item.name} />
@@ -54,7 +54,7 @@ const LeftSideBar = () => {
                       <span className='text-primary-100 font-bold tracking-wider'>{item.name}</span>
                       {item.category === 'fuel' ? (
                         <div className='flex space-x-2'>
-                        <Select disabled>
+                        <Select onValueChange={(value) => handleQty(item, value)} >
                           <SelectTrigger className="w-[60px] bg-primary-500 text-primary-100 rounded-2xl border-none">
                             <SelectValue placeholder={item.qty} />
                           </SelectTrigger>
@@ -65,14 +65,14 @@ const LeftSideBar = () => {
                             </SelectGroup>
                           </SelectContent>
                         </Select>
-                        <Input disabled value={item.litre} className='bg-primary-500 border-none rounded-2xl text-primary-100 w-[50px]' />
+                        <Input onChange={(e: any) => handleChangeLitre(item, e.target.value)}  value={item.litre} className='bg-primary-500 border-none rounded-2xl text-primary-100 w-[50px]' />
                       </div>
                       ): (
                         <div className='flex items-center justify-center space-x-2 bg-primary-500 w-full h-full rounded-full'>
                         <div className='flex justify-between items-center px-4 h-[40px] w-[125px]'>
-                         <button className='text-primary-100'>-</button>
+                         <button className='text-primary-100' onClick={decrease(item)}>-</button>
                          <span className='text-primary-100'>{item.qty}</span>
-                         <button className='text-primary-100'>+</button>
+                         <button className='text-primary-100' onClick={increase(item)}>+</button>
                         </div>
                       </div>
                       )}
